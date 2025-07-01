@@ -57,8 +57,8 @@ exports.handler = async function (event) {
     };
   }
 };
-import { v4 as uuidv4 } from 'uuid';
-import fetch from 'node-fetch';
+const fetch = require('node-fetch');
+const { v4: uuidv4 } = require('uuid');
 
 export async function handler(event) {
   try {
