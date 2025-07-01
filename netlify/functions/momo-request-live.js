@@ -5,7 +5,7 @@ exports.handler = async function (event) {
   try {
     const { amount, phone } = JSON.parse(event.body);
 
-    const subscriptionKey = "3c9aa91fc6ca42a8989180f12d037a79"; // Replace with your key
+    const subscriptionKey = "a9104af55ce84244841af78fadb536c9"; // Replace with your key
     const tokenUrl = "https://sandbox.momodeveloper.mtn.com/collection/v1_0/bc-authorize"; // ✅ LIVE TOKEN URL
 
     // Step 1: Get Access Token
