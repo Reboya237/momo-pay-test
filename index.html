@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MADECC Courses & eBooks | Secure Payment</title>
+  <meta name="description" content="Buy professional courses and eBooks from MADECC-CONSTRUCTION. Secure MTN MoMo live payment integration."/>
+  <meta name="keywords" content="online courses,eBooks,MTN MoMo,web development,architecture,business training"/>
+  <style>
+    /* --- RESET & BASE --- */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: Arial, sans-serif; background:#f4f4f4; color:#333; }
+
+    /* --- CONTAINER --- */
+    .container { width:90%; max-width:1200px; margin:30px auto; }
+
+    /* --- HEADER --- */
+    header { text-align:center; margin-bottom:50px; }
+    header h1 { font-size:2.5rem;
+	color:#000; }
+    header p { font-size:1.2rem; 
+	margin-top:10px; }
+
+    /* --- GRID CARDS --- */
+    .grid { display:grid; gap:20px; }
+    .courses .grid { grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); }
+
+    .card { background:#fff; border-radius:8px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
+    .card img { width:100%; height:auto; }
+    .card-content { padding:20px; }
+    .card h3 { margin-bottom:10px; }
+    .card p { margin-bottom:15px; font-size:0.95rem; }
+    .card button {
+      display:block;
+      width:100%;
+      padding:12px;
+      background:#fcb900;
+      color:#000;
+      border:none;
+      border-radius:5px;
+      font-weight:bold;
+      cursor:pointer;
+    }
+
+    /* --- RESPONSE BOX --- */
+    #response { text-align:center; margin:40px 0; font-weight:bold; }
+
+    /* --- FOOTER --- */
+    footer { text-align:center; padding:20px 0; background:#222; color:#fff; font-size:0.9rem; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Hero -->
+    <header>
+      <h1>Unlock Your Potential with MADECC</h1>
+      <p>Expert-led courses & eBooks. Pay securely via MTN MoMo.</p>
+    </header>
+
+    <!-- Courses -->
+    <section class="courses">
+      <h2 style="text-align:center; margin-bottom:30px;">Our Top Courses</h2>
+      <div class="grid">
+        <!-- Course 1 -->
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250" alt="Web Development Course">
+          <div class="card-content">
+            <h3>Web Development for Beginners</h3>
+            <p>Learn HTML, CSS, JavaScript and build real websites from scratch.</p>
+            <p><strong>Price:</strong> 20,000 XAF</p>
+            <button onclick="payLive('20000','2376XXXXXXXX')">Buy Now</button>
+          </div>
+        </div>
+        <!-- Course 2 -->
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250" alt="Architecture Design Course">
+          <div class="card-content">
+            <h3>Architectural Design Masterclass</h3>
+            <p>Advanced techniques in 3D modeling and architectural planning.</p>
+            <p><strong>Price:</strong> 25,000 XAF</p>
+            <button onclick="payLive('25000','2376XXXXXXXX')">Buy Now</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- eBooks -->
+    <section class="ebooks" style="margin-top:60px;">
+      <h2 style="text-align:center; margin-bottom:30px;">Our eBooks</h2>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">
+        <!-- eBook 1 -->
+        <div class="card">
+          <img src="https://via.placeholder.com/200x300" alt="AI Tools eBook">
+          <div class="card-content">
+            <h3>AI Tools Guide</h3>
+            <p>A comprehensive guide to the latest AI productivity tools.</p>
+            <p><strong>Price:</strong> 5,000 XAF</p>
+            <button onclick="payLive('5000','2376XXXXXXXX')">Buy Now</button>
+          </div>
+        </div>
+        <!-- eBook 2 -->
+        <div class="card">
+          <img src="https://via.placeholder.com/200x300" alt="Business Strategies eBook">
+          <div class="card-content">
+            <h3>Business Strategies</h3>
+            <p>Proven tactics to grow and scale your business effectively.</p>
+            <p><strong>Price:</strong> 7,000 XAF</p>
+            <button onclick="payLive('7000','2376XXXXXXXX')">Buy Now</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Response Message -->
+    <div id="response"></div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>&copy; 2025 MADECC-CONSTRUCTION. All rights reserved.</footer>
+
+  <!-- Live MoMo Payment Script -->
+  <script>
+    async function payLive(amount, phone) {
+      const resBox = document.getElementById('response');
+      resBox.innerText = 'Processing payment…';
+      try {
+        const res = await fetch('/.netlify/functions/momo-request-live', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ amount, phone })
+        });
+        const text = await res.text();
+        resBox.innerText = text;
+      } catch (err) {
+        resBox.innerText = '❌ Error: ' + err.message;
+      }
+    }
+  </script>
+
+</body>
+</html>
