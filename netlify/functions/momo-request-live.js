@@ -4,7 +4,7 @@ import fetch from 'node-fetch';
 export async function handler(event) {
   try {
     const { amount, phone } = JSON.parse(event.body);
-    const subscriptionKey = "YOUR_LIVE_PRIMARY_KEY";  // Replace this
+    const subscriptionKey = "3c9aa91fc6ca42a8989180f12d037a79";  // Replace this
 
     const tokenRes = await fetch("https://momodeveloper.mtn.com/collection/token/", {
       method: "POST",
