@@ -1,7 +1,6 @@
 {
   "name": "momo-netlify-live",
   "version": "1.0.0",
-  "type": "module",
   "dependencies": {
     "uuid": "^9.0.0",
     "node-fetch": "^2.6.1"
