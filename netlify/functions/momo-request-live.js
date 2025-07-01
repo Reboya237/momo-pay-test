@@ -4,13 +4,15 @@ const fetch = require("node-fetch");
 exports.handler = async function (event) {
   try {
     const { amount, phone } = JSON.parse(event.body);
-    const subscriptionKey = "3c9aa91fc6ca42a8989180f12d037a79"; // Replace this with your live key
 
-    const tokenRes = await fetch("https://momodeveloper.mtn.com/collection/token/", {
+    const subscriptionKey = "3c9aa91fc6ca42a8989180f12d037a79"; // Replace with your key
+    const tokenUrl = "https://sandbox.momodeveloper.mtn.com/collection/v1_0/bc-authorize"; // ✅ LIVE TOKEN URL
+
+    // Step 1: Get Access Token
+    const tokenRes = await fetch(tokenUrl, {
       method: "POST",
       headers: {
-        "Ocp-Apim-Subscription-Key": subscriptionKey,
-        "Content-Type": "application/json"
+        "Ocp-Apim-Subscription-Key": subscriptionKey
       }
     });
 
@@ -22,12 +24,13 @@ exports.handler = async function (event) {
     const { access_token } = await tokenRes.json();
     const reference = uuid.v4();
 
-    const payRes = await fetch("https://momodeveloper.mtn.com/collection/v1_0/requesttopay", {
+    // Step 2: Send Payment Request
+    const payRes = await fetch("https://proxy.momoapi.mtn.com/collection/v1_0/requesttopay", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${access_token}`,
         "X-Reference-Id": reference,
-        "X-Target-Environment": "mtncameroon",
+        "X-Target-Environment": "mtncameroon", // or "sandbox" if testing
         "Ocp-Apim-Subscription-Key": subscriptionKey,
         "Content-Type": "application/json"
       },
@@ -36,8 +39,8 @@ exports.handler = async function (event) {
         currency: "XAF",
         externalId: reference,
         payer: { partyIdType: "MSISDN", partyId: phone },
-        payerMessage: "Thank you for your purchase",
-        payeeNote: "MADECC CONSTRUCTION"
+        payerMessage: "Purchase from MADECC",
+        payeeNote: "eBook or Course Payment"
       })
     });
 
