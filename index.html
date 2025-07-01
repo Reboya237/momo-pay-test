@@ -7,138 +7,54 @@
   <meta name="description" content="Buy professional courses and eBooks from MADECC-CONSTRUCTION. Secure MTN MoMo live payment integration."/>
   <meta name="keywords" content="online courses,eBooks,MTN MoMo,web development,architecture,business training"/>
   <style>
-    /* --- RESET & BASE --- */
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family: Arial, sans-serif; background:#f4f4f4; color:#333; }
-
-    /* --- CONTAINER --- */
-    .container { width:90%; max-width:1200px; margin:30px auto; }
-
-    /* --- HEADER --- */
-    header { text-align:center; margin-bottom:50px; }
-    header h1 { font-size:2.5rem;
-	color:#000; }
-    header p { font-size:1.2rem; 
-	margin-top:10px; }
-
-    /* --- GRID CARDS --- */
-    .grid { display:grid; gap:20px; }
-    .courses .grid { grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); }
-
-    .card { background:#fff; border-radius:8px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
-    .card img { width:100%; height:auto; }
-    .card-content { padding:20px; }
-    .card h3 { margin-bottom:10px; }
-    .card p { margin-bottom:15px; font-size:0.95rem; }
-    .card button {
-      display:block;
-      width:100%;
-      padding:12px;
-      background:#fcb900;
-      color:#000;
-      border:none;
-      border-radius:5px;
-      font-weight:bold;
-      cursor:pointer;
-    }
-
-    /* --- RESPONSE BOX --- */
-    #response { text-align:center; margin:40px 0; font-weight:bold; }
-
-    /* --- FOOTER --- */
-    footer { text-align:center; padding:20px 0; background:#222; color:#fff; font-size:0.9rem; }
+    body { font-family: Arial, sans-serif; background:#f4f4f4; color:#333; margin:0; padding:0; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+    h1, h2 { text-align: center; }
+    .grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+    .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    button { background: #ffc107; border: none; padding: 10px; width: 100%; border-radius: 5px; cursor: pointer; font-weight: bold; }
+    #response { margin-top: 20px; text-align: center; font-weight: bold; }
   </style>
 </head>
 <body>
-
   <div class="container">
+    <h1>MADECC eBooks & Courses</h1>
+    <p style="text-align:center;">Buy securely with MTN MoMo</p>
 
-    <!-- Hero -->
-    <header>
-      <h1>Unlock Your Potential with MADECC</h1>
-      <p>Expert-led courses & eBooks. Pay securely via MTN MoMo.</p>
-    </header>
-
-    <!-- Courses -->
-    <section class="courses">
-      <h2 style="text-align:center; margin-bottom:30px;">Our Top Courses</h2>
-      <div class="grid">
-        <!-- Course 1 -->
-        <div class="card">
-          <img src="https://via.placeholder.com/400x250" alt="Web Development Course">
-          <div class="card-content">
-            <h3>Web Development for Beginners</h3>
-            <p>Learn HTML, CSS, JavaScript and build real websites from scratch.</p>
-            <p><strong>Price:</strong> 500 XAF</p>
-            <button onclick="payLive('500','2376XXXXXXXX')">Buy Now</button>
-          </div>
-        </div>
-        <!-- Course 2 -->
-        <div class="card">
-          <img src="https://via.placeholder.com/400x250" alt="Architecture Design Course">
-          <div class="card-content">
-            <h3>Architectural Design Masterclass</h3>
-            <p>Advanced techniques in 3D modeling and architectural planning.</p>
-            <p><strong>Price:</strong> 25,000 XAF</p>
-            <button onclick="payLive('25000','2376XXXXXXXX')">Buy Now</button>
-          </div>
-        </div>
+    <div class="grid">
+      <div class="card">
+        <h2>Web Dev Course</h2>
+        <p>Learn HTML, CSS, JS</p>
+        <p><strong>Price: 20000 XAF</strong></p>
+        <button onclick="pay('20000','2376XXXXXXXX')">Pay Now</button>
       </div>
-    </section>
-
-    <!-- eBooks -->
-    <section class="ebooks" style="margin-top:60px;">
-      <h2 style="text-align:center; margin-bottom:30px;">Our eBooks</h2>
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">
-        <!-- eBook 1 -->
-        <div class="card">
-          <img src="https://via.placeholder.com/200x300" alt="AI Tools eBook">
-          <div class="card-content">
-            <h3>AI Tools Guide</h3>
-            <p>A comprehensive guide to the latest AI productivity tools.</p>
-            <p><strong>Price:</strong> 500 XAF</p>
-            <button onclick="payLive('500','2376XXXXXXXX')">Buy Now</button>
-          </div>
-        </div>
-        <!-- eBook 2 -->
-        <div class="card">
-          <img src="https://via.placeholder.com/200x300" alt="Business Strategies eBook">
-          <div class="card-content">
-            <h3>Business Strategies</h3>
-            <p>Proven tactics to grow and scale your business effectively.</p>
-            <p><strong>Price:</strong> 7,000 XAF</p>
-            <button onclick="payLive('7000','2376XXXXXXXX')">Buy Now</button>
-          </div>
-        </div>
+      <div class="card">
+        <h2>Architecture Design</h2>
+        <p>3D and Planning</p>
+        <p><strong>Price: 25000 XAF</strong></p>
+        <button onclick="pay('25000','2376XXXXXXXX')">Pay Now</button>
       </div>
-    </section>
+    </div>
 
-    <!-- Response Message -->
     <div id="response"></div>
-
   </div>
 
-  <!-- Footer -->
-  <footer>&copy; 2025 MADECC-CONSTRUCTION. All rights reserved.</footer>
-
-  <!-- Live MoMo Payment Script -->
   <script>
-    async function payLive(amount, phone) {
-      const resBox = document.getElementById('response');
-      resBox.innerText = 'Processing payment…';
+    async function pay(amount, phone) {
+      const responseDiv = document.getElementById("response");
+      responseDiv.innerText = "Processing...";
       try {
         const res = await fetch('/.netlify/functions/momo-request-live', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ amount, phone })
         });
-        const text = await res.text();
-        resBox.innerText = text;
+        const msg = await res.text();
+        responseDiv.innerText = msg;
       } catch (err) {
-        resBox.innerText = '❌ Error: ' + err.message;
+        responseDiv.innerText = "❌ Error: " + err.message;
       }
     }
   </script>
-
 </body>
 </html>
