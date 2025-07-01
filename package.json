@@ -4,6 +4,6 @@
   "type": "module",
   "dependencies": {
     "uuid": "^9.0.0",
-    "node-fetch": "^3.3.1"
+    "node-fetch": "^2.6.1"
   }
 }
